@@ -1,0 +1,5 @@
+<root>
+    <item name='android.icu.util.Calendar'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>
