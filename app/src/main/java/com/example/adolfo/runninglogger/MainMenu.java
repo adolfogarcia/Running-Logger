@@ -31,12 +31,14 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        User mainUser = MainActivity.mainUser;
+
         DateFormat df = new SimpleDateFormat("EEE MMM d, yyyy");
         TimeZone PST = TimeZone.getTimeZone("America/Los_Angeles");
         df.setTimeZone(PST);
         String date = df.format(Calendar.getInstance().getTime());
 
-        setTitle(date);
+        setTitle(date + " - Hello, " + mainUser.getUserName());
     }
 
     // 8-29-17: maybe we can modify this with a switch statement so that we can have only one GoTo function
