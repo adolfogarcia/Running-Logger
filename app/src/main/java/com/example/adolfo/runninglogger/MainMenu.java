@@ -73,6 +73,11 @@ public class MainMenu extends AppCompatActivity {
                 intent.putExtra(EXTRA_MESSAGE, message);
                 startActivity(intent);
                 break;
+            case "Settings":
+                intent = new Intent(this, Settings.class);
+                intent.putExtra(EXTRA_MESSAGE, message);
+                startActivity(intent);
+                break;
             default:
                 break;
         }

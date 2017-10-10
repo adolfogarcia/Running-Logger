@@ -1,6 +1,8 @@
 package com.example.adolfo.runninglogger;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
@@ -32,10 +34,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(mainUser.getUserName() == "NONE")
+        boolean contains = false;
+        SharedPreferences sharedPref = getSharedPreferences("USER", Context.MODE_PRIVATE);
+
+        contains = sharedPref.contains("USERNAME");
+
+        if(!contains)
         {
             goToSetUpUser();
+            contains = sharedPref.contains("USERNAME");
         }
+
+
+
+        // Get username and mileage from sharedPreference
+        mainUser.setUserName(sharedPref.getString("USERNAME", "NONE"));
+        mainUser.setMileage(Integer.toString(sharedPref.getInt("MILEAGE GOAL", 0)));
+
 
         DateFormat df = new SimpleDateFormat("EEE MMM dd, yyyy");  // Get today's Date
         TimeZone PST = TimeZone.getTimeZone("America/Los_Angeles");
