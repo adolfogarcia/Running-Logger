@@ -21,6 +21,8 @@ public class weekView extends AppCompatActivity {
 
         setTitle("Week View");
 
+        // Currently this would print out ALL the workouts in the workout queue
+        // Need to add functionaility to only print out the workout of a certain week
         for(int i = 0; i < thisUser.getWorkoutLL().size(); i++)
         {
             Workout temp = (Workout) thisUser.getWorkoutLL().get(i);

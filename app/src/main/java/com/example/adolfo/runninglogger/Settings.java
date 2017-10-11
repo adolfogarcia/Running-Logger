@@ -63,6 +63,8 @@ public class Settings extends AppCompatActivity {
             editor.putInt("MILEAGE GOAL", Integer.parseInt(etMileage.toString()));
             success = editor.commit();
         }
+
+        // A check for if the message was succesfully saved
         if(success)
         {
             Toast.makeText(this, "Succesfully saved.", Toast.LENGTH_SHORT).show();

@@ -34,6 +34,8 @@ public class setUpUser extends AppCompatActivity {
         String name = (etName.getText().toString());
         String mileage  = (etMileage.getText().toString());
 
+        // Here we make sure the user actually entered values. If they didn't the app would crash.
+        // 10-10-17: Need to add a message for invalid input and a way to detect invalid input
         if(!name.isEmpty() && !mileage.isEmpty())
         {
             success = saveInfo(etName.getText().toString(), Integer.parseInt(etMileage.getText().toString()));

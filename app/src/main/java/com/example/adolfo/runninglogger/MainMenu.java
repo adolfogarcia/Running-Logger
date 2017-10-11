@@ -31,8 +31,13 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        // We make our own copy of mainUser to manipulate
+        // 10-10-17: Consider creating copy constructor with reference to save time copying info
         User mainUser = MainActivity.mainUser;
 
+        // Getting the date and updating the time zone to make sure they are correct
+        // 10-10-17: Consider Making this it's own function in like a utility class because
+        //      tend to get the date a lot in this App
         DateFormat df = new SimpleDateFormat("EEE MMM d, yyyy");
         TimeZone PST = TimeZone.getTimeZone("America/Los_Angeles");
         df.setTimeZone(PST);
@@ -46,11 +51,16 @@ public class MainMenu extends AppCompatActivity {
     // 8-29-17 Update: making a switch worked. However, it makes me wonder if a switch is slightly slower
     // because if we made every individual startActivity() its own function, there wouldn't be any
     // having look up the value of message to make a choice; the program would immediately know where to go.
+
+    /*
+     * The way this function works is by getting the button that was pressed, taking the text on that button,
+     * and then using that text to determine which screen/activity to go to, using a switch statement.
+     */
     public void goToNextMenu(View view)
     {
         Intent intent;
         int buttonID = view.getId(); // We get the ID of the button that we pressed
-        Button choice = (Button) findViewById(buttonID); // We then make a button object itself
+        Button choice = (Button) findViewById(buttonID); // We then make a button copy
         String message = choice.getText().toString(); // We extract the text on the button
 
         // Switch statement based on the text on the button

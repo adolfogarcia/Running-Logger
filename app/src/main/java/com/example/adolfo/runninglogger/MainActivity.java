@@ -26,6 +26,12 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class MainActivity extends AppCompatActivity {
 
+    /*
+     *  MainUser is the variable that will hold ALL the info necessary to run the program.
+     *  It will contain the username, weekly goal mileage, and all the individual workouts.
+     *  If the other activities need to access the info, they will call
+     *  newVariable = mainActivity.MainUser;
+    */
     public static User mainUser = new User();   // BIG MONEY RIGHT HERE
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -34,25 +40,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Contains is used to determine if the userName has been set yet. If contains is false, that means
+        // this is the first time firing up the app
         boolean contains = false;
+
+        // We store the Username and Weekly goal mileage in a sharedPreference labelled with "USER"
         SharedPreferences sharedPref = getSharedPreferences("USER", Context.MODE_PRIVATE);
 
+        // here we determine if the username exists
         contains = sharedPref.contains("USERNAME");
 
+        // If contains = false, we go to a set-up menu to set up username and weekly goal mileage
         if(!contains)
         {
             goToSetUpUser();
             contains = sharedPref.contains("USERNAME");
         }
 
-
-
-        // Get username and mileage from sharedPreference
+        // Get username and mileage from sharedPreference. They should exist at this portion of the code
         mainUser.setUserName(sharedPref.getString("USERNAME", "NONE"));
         mainUser.setMileage(Integer.toString(sharedPref.getInt("MILEAGE GOAL", 0)));
 
-
-        DateFormat df = new SimpleDateFormat("EEE MMM dd, yyyy");  // Get today's Date
+        // Get today's Date
+        DateFormat df = new SimpleDateFormat("EEE MMM dd, yyyy");
+        // We use this to make sure the proper time zone is used for the date, or else we'd get EST dates
         TimeZone PST = TimeZone.getTimeZone("America/Los_Angeles");
         df.setTimeZone(PST);
         String date = df.format(Calendar.getInstance().getTime());
@@ -61,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // Used as a onClick function
     public void goToMainMenu(View view)
     {
         Intent intent = new Intent(this, MainMenu.class);
@@ -69,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Used as a onClick function
     public void goToSetUpUser()
     {
         Intent intent = new Intent(this, setUpUser.class);

@@ -36,7 +36,8 @@ import static android.R.id.message;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 // BIG ADDITION: WorkoutName button should try to guess your workout based on what day it is.
-// And chnge the colors depending on the workout type
+// And change the colors depending on the workout type. Shoutout to Ryan Manny for that idea
+
 public class newWorkout2 extends AppCompatActivity {
 
     // These variables are all declared here because they will be needed all over the program
@@ -56,8 +57,6 @@ public class newWorkout2 extends AppCompatActivity {
         setContentView(R.layout.activity_new_workout2);
         myCalendar.setTimeZone(TimeZone.getTimeZone("PST"));
 
-      //  Intent intent = getIntent();
-      //  String message = intent.getStringExtra(newWorkout2.EXTRA_MESSAGE);
         setTitle("New Workout");
 
         Button b = (Button) findViewById(R.id.button_datePicker);
@@ -65,7 +64,7 @@ public class newWorkout2 extends AppCompatActivity {
         container = (LinearLayout) findViewById(R.id.linearLayout);
 
 
-        // This stuff creates the DatePicker
+        // This code creates the DatePicker
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
             @Override
@@ -81,7 +80,7 @@ public class newWorkout2 extends AppCompatActivity {
 
         };
 
-        // I think this cretes a click listener for when to create the datepicker
+        // This creates a click listener for when to create the datepicker
         b.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -95,19 +94,23 @@ public class newWorkout2 extends AppCompatActivity {
         });
 
         final Button bWorkoutName = (Button) findViewById(R.id.button_workoutName);
+
+        // This code creates a popUp menu for deciding the type of running workout
         bWorkoutName.setOnClickListener(new View.OnClickListener() {
             PopupMenu popup;
             @Override
             public void onClick(View v) {
                 //Creating the instance of PopupMenu
                  popup = new PopupMenu(newWorkout2.this, bWorkoutName);
-                //Inflating the Popup using xml file
+                //Inflating the Popup using xml file called "workout_names.xml"
                 popup.getMenuInflater().inflate(R.menu.workout_names, popup.getMenu());
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
+                        // we show a message showing what the user clicked
                         Toast.makeText(newWorkout2.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
                         bWorkoutName.setText(item.getTitle());
+                        // We save the workout name for use later on
                         workoutName = item.getTitle().toString();
                         return true;
                     }
@@ -116,6 +119,7 @@ public class newWorkout2 extends AppCompatActivity {
             }
          });//closing the setOnClickListener method
 
+        // This is the code for the Fatigue Level button. Uses similar code for the workout type menu
         final Button bFL = (Button) findViewById(R.id.button_fatigueLevel);
         bFL.setOnClickListener(new View.OnClickListener() {
             PopupMenu popup;
@@ -123,13 +127,14 @@ public class newWorkout2 extends AppCompatActivity {
             public void onClick(View v) {
                 //Creating the instance of PopupMenu
                 popup = new PopupMenu(newWorkout2.this, bFL);
-                //Inflating the Popup using xml file
+                //Inflating the Popup using xml file called "fatigue_level.xml"
                 popup.getMenuInflater().inflate(R.menu.fatigue_level, popup.getMenu());
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                        // Toast.makeText(newWorkout2.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
                         bFL.setText("Fatigue Level: " + item.getTitle());
+                        // we store the number for use later on
                         FL = item.getTitle().toString();
                         return true;
                     }
@@ -140,6 +145,7 @@ public class newWorkout2 extends AppCompatActivity {
 
     }
 
+    // This is the start for the code for adding editTexts for the splits for workouts like VO2s
     public void addEditText(View view)
     {
         totalEditTexts++;
@@ -165,6 +171,9 @@ public class newWorkout2 extends AppCompatActivity {
         tvDateChosen.setText(sdf.format(myCalendar.getTime()));
     }
 
+    /*
+     * This code stores ALL the info put in by the user
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void getAllInfo(View view)
     {
@@ -194,6 +203,7 @@ public class newWorkout2 extends AppCompatActivity {
 
         newWorkout.setSplitType(etSplitType.getText().toString());
 
+        // Once the workout is full of all the information, we enqueue it to the Workout queue in MainUser
         thisUser.enqueueNewWorkout(newWorkout);
 
         Intent intent = new Intent(this, MainMenu.class);
@@ -201,11 +211,6 @@ public class newWorkout2 extends AppCompatActivity {
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
-
-
-
-
-
 
 
    // public SimpleDateFormat getDate
