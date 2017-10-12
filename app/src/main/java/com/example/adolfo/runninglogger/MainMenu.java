@@ -1,6 +1,8 @@
 package com.example.adolfo.runninglogger;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
@@ -24,6 +26,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
  */
 
 public class MainMenu extends AppCompatActivity {
+    User mainUser = MainActivity.mainUser;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -33,7 +36,7 @@ public class MainMenu extends AppCompatActivity {
 
         // We make our own copy of mainUser to manipulate
         // 10-10-17: Consider creating copy constructor with reference to save time copying info
-        User mainUser = MainActivity.mainUser;
+
 
         // Getting the date and updating the time zone to make sure they are correct
         // 10-10-17: Consider Making this it's own function in like a utility class because
@@ -44,6 +47,21 @@ public class MainMenu extends AppCompatActivity {
         String date = df.format(Calendar.getInstance().getTime());
 
         setTitle(date + " - Hello, " + mainUser.getUserName());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onResume()
+    {
+        super.onResume();  // Always call the superclass method first
+
+        DateFormat df = new SimpleDateFormat("EEE MMM d, yyyy");
+        TimeZone PST = TimeZone.getTimeZone("America/Los_Angeles");
+        df.setTimeZone(PST);
+
+        String date = df.format(Calendar.getInstance().getTime());
+        setTitle(date + " - Hello, " + mainUser.getUserName());
+
     }
 
     // 8-29-17: maybe we can modify this with a switch statement so that we can have only one GoTo function

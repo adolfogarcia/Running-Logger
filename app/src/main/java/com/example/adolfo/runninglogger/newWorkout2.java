@@ -18,6 +18,7 @@ import android.support.v7.widget.PopupMenu;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -100,6 +101,9 @@ public class newWorkout2 extends AppCompatActivity {
             PopupMenu popup;
             @Override
             public void onClick(View v) {
+                //HIDES THE ANDROID KEYBOARD AFTER PRESSING A SPECIFIC BUTTON. GODBLESS THIS CODE.
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 //Creating the instance of PopupMenu
                  popup = new PopupMenu(newWorkout2.this, bWorkoutName);
                 //Inflating the Popup using xml file called "workout_names.xml"
@@ -107,8 +111,9 @@ public class newWorkout2 extends AppCompatActivity {
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
+
                         // we show a message showing what the user clicked
-                        Toast.makeText(newWorkout2.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(newWorkout2.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
                         bWorkoutName.setText(item.getTitle());
                         // We save the workout name for use later on
                         workoutName = item.getTitle().toString();
@@ -125,6 +130,9 @@ public class newWorkout2 extends AppCompatActivity {
             PopupMenu popup;
             @Override
             public void onClick(View v) {
+                //HIDES THE ANDROID KEYBOARD AFTER PRESSING A SPECIFIC BUTTON. GODBLESS THIS CODE.
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
                 //Creating the instance of PopupMenu
                 popup = new PopupMenu(newWorkout2.this, bFL);
                 //Inflating the Popup using xml file called "fatigue_level.xml"
@@ -132,6 +140,7 @@ public class newWorkout2 extends AppCompatActivity {
                 //registering popup with OnMenuItemClickListener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
+
                        // Toast.makeText(newWorkout2.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
                         bFL.setText("Fatigue Level: " + item.getTitle());
                         // we store the number for use later on
@@ -169,6 +178,9 @@ public class newWorkout2 extends AppCompatActivity {
 
 
         tvDateChosen.setText(sdf.format(myCalendar.getTime()));
+        //HIDES THE ANDROID KEYBOARD AFTER PRESSING A SPECIFIC BUTTON. GODBLESS THIS CODE.
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 
     /*

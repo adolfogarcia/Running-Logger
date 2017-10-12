@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import static android.R.id.message;
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView tvGoalMileage = (TextView) findViewById(R.id.textView_goalMileage);
 
         // Contains is used to determine if the userName has been set yet. If contains is false, that means
         // this is the first time firing up the app
@@ -69,6 +71,21 @@ public class MainActivity extends AppCompatActivity {
         String date = df.format(Calendar.getInstance().getTime());
 
         setTitle(date + " - Hello, " + mainUser.getUserName()); // Set today's date as the title of the Page
+        tvGoalMileage.append(String.valueOf(mainUser.getGoalMileage()));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onResume()
+    {
+        super.onResume();  // Always call the superclass method first
+
+        DateFormat df = new SimpleDateFormat("EEE MMM d, yyyy");
+        TimeZone PST = TimeZone.getTimeZone("America/Los_Angeles");
+        df.setTimeZone(PST);
+
+        String date = df.format(Calendar.getInstance().getTime());
+        setTitle(date + " - Hello, " + mainUser.getUserName());
 
     }
 

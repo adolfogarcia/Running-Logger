@@ -1,5 +1,8 @@
 package com.example.adolfo.runninglogger;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -57,8 +60,11 @@ public class User {
 
     public String getUserName()
     {
+
         return mUserName;
     }
+
+    public double getGoalMileage() {return mGoalMileage; }
 
     public Workout getWorkout()
     {

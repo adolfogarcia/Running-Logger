@@ -28,10 +28,10 @@ public class weekView extends AppCompatActivity {
             Workout temp = (Workout) thisUser.getWorkoutLL().get(i);
             tvInfo.append("Workout Name:  " + temp.getWorkoutName()+ '\n');
             tvInfo.append("Date:  " + temp.getDate() + '\n');
-            tvInfo.append("Mileage:  " + temp.getMileage() + '\n');
-            tvInfo.append("Duration:  " + temp.getDuration() + '\n');
+            tvInfo.append("Mileage:  " + temp.getMileage() + " miles" + '\n');
+            tvInfo.append("Duration:  " + temp.getDuration() + " minutes" + '\n');
             tvInfo.append("Location:  " + temp.getLocation() + '\n');
-            tvInfo.append("Fatigue Level:  " + temp.getFatigueLevel() + '\n');
+            tvInfo.append("Fatigue Level: " + temp.getFatigueLevel() + '\n');
             tvInfo.append("Weather:  " + temp.getWeather() + '\n');
             tvInfo.append("SplitType:  " + temp.getSplitType() + '\n' + '\n');
         }
