@@ -11,7 +11,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Weather and Temperature here"
         android:textColor="#000000"
         android:textStyle="normal"
         android:textSize="17dp"

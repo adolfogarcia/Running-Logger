@@ -44,19 +44,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Contains is used to determine if the userName has been set yet. If contains is false, that means
         // this is the first time firing up the app
-        boolean contains = false;
+        boolean containsUsername = false;
 
         // We store the Username and Weekly goal mileage in a sharedPreference labelled with "USER"
         SharedPreferences sharedPref = getSharedPreferences("USER", Context.MODE_PRIVATE);
 
         // here we determine if the username exists
-        contains = sharedPref.contains("USERNAME");
+        containsUsername = sharedPref.contains("USERNAME");
 
         // If contains = false, we go to a set-up menu to set up username and weekly goal mileage
-        if(!contains)
+        if(!containsUsername)
         {
             goToSetUpUser();
-            contains = sharedPref.contains("USERNAME");
+            containsUsername = sharedPref.contains("USERNAME");
         }
 
         // Get username and mileage from sharedPreference. They should exist at this portion of the code
@@ -93,8 +93,7 @@ public class MainActivity extends AppCompatActivity {
     public void goToMainMenu(View view)
     {
         Intent intent = new Intent(this, MainMenu.class);
-
-        intent.putExtra(EXTRA_MESSAGE, message);
+        //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
@@ -102,8 +101,7 @@ public class MainActivity extends AppCompatActivity {
     public void goToSetUpUser()
     {
         Intent intent = new Intent(this, setUpUser.class);
-
-        intent.putExtra(EXTRA_MESSAGE, message);
+       // intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 }
